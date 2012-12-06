@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    
+    <item 
+        android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" >
+    	<menu>
+    	    <!-- <item 
+    	        android:id="@+id/freq_settings"
+        		android:title="@string/freq_settings" />   	   -->
+    	</menu>
+	</item>
+	
+    <item android:id="@+id/menu_item_share"
+        android:showAsAction="ifRoom"
+        android:title="Share"
+        android:actionProviderClass="android.widget.ShareActionProvider" />
+    
+	<item 
+	    android:id="@+id/bt_settings"
+	    android:title="@string/bt_settings"
+	    android:showAsAction="ifRoom" >
+    	<menu>
+    	    <item 
+    	        android:id="@+id/discoverable"
+    	        android:title="@string/discoverable" />
+    	    <item android:id="@+id/connect_scan"
+    	        android:title="@string/connect"/>
+    	</menu>
+	</item>
+</menu>

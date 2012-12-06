@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="NewApi">
+        <ignore path="src/appliedradar/bluetooth/gui/Bluetooth_GUI.java" />
+        <ignore path="src/appliedradar/bluetooth/gui/DisplayArchive.java" />
+        <ignore path="src/appliedradar/bluetooth/gui/MainActivity.java" />
+    </issue>
+    <issue id="OldTargetApi">
+        <ignore path="AndroidManifest.xml" />
+    </issue>
+    <issue id="UnusedResources">
+        <ignore path="res/drawable-hdpi/ic_action_search.png" />
+        <ignore path="res/values/strings.xml" />
+    </issue>
+</lint>

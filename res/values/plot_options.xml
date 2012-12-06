@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="raw_plot">Raw Data</string>
+    <string name="range_plot">Range</string>
+    <string name="doppler_plot">Doppler</string>
+    <string name="fft_plot">Power Spectrum (FFT)</string>
+    <string name="sar_plot">SAR</string>
+</resources>

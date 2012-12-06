@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >   
+    <group 
+		android:id="@+id/saving_menu"
+        android:checkableBehavior="single" >
+        <item
+        	android:id="@+id/text_file"
+            android:title="@string/text_file" 
+            android:enabled="true"
+            android:onClick="onOptionsItemSelected" />
+        <item
+        	android:id="@+id/binary_file"
+            android:title="@string/binary_file" 
+             android:enabled="true"
+        	android:onClick="onOptionsItemSelected"/>
+        <item
+        	android:id="@+id/compressed_file"
+            android:title="@string/compressed_file"
+            android:enabled="true"
+            android:onClick="onOptionsItemSelected" />
+        <item
+        	android:id="@+id/matlab_file"
+            android:title="@string/matlab_file"
+            android:enabled="true"
+            android:onClick="onOptionsItemSelected" />
+	</group>
+</menu>

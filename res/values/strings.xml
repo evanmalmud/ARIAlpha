@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bluetooth GUI</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_main_activity">Applied Radar, Inc. FMCW Radar Kit</string>
+    <string name="send_to">Send to</string>
+    <string name="freq_settings">Frequency Shifter</string>
+    <string name="bt_settings">Bluetooth Connections</string>
+    <string name="device_search">Search for Devices</string>
+    <string name="device_pair">Paired Devices</string>
+    <string name="device_connect">Discovered Devices</string>
+    <string name="collect_data">Collect Data</string>
+    <string name="load_data">Load Data</string>
+    <string name="save_data">Save</string>
+    <string name="share_data">Share</string>
+    <string name="plot_data">Plot</string>
+    <string name="statistics_log">Statistics</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_item_list">Items</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_display_archive">DisplayArchive</string>
+    <string name="title_activity_device_list">DeviceListActivity</string>
+
+</resources>

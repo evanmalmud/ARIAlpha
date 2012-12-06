@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <group android:id="@+id/plotting_menu"
+        android:checkableBehavior="single" >
+        
+        <item android:id="@+id/raw_plot"
+            android:title="@string/raw_plot" />
+            <!--android:onClick="onMenuItemClick" /> -->
+        <item android:id="@+id/range_plot"
+            android:title="@string/range_plot" />
+        <item android:id="@+id/doppler_plot"
+            android:title="@string/doppler_plot" />
+        <item android:id="@+id/fft_plot"
+            android:title="@string/fft_plot" />
+        <item android:id="@+id/sar_plot"
+            android:title="@string/sar_plot" />
+	</group>
+</menu>

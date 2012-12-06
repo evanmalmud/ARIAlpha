@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_file">Text (.txt)</string>
+    <string name="binary_file">Binary</string>
+    <string name="compressed_file">Compressed (.zip)</string>
+    <string name="matlab_file">Matlab (.mat)</string>
+</resources>

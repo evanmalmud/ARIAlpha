@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".MainActivity" >
+
+    <!--
+         <RelativeLayout
+        android:id="@+id/button_group2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" >
+    -->
+
+    <Button
+        android:id="@+id/button_share"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="plotFFT"
+        android:text="Plot FFT"
+        android:textSize="28sp" />
+
+    <ListView
+        android:id="@+id/in"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button_plot"
+        android:layout_alignTop="@+id/chart"
+        android:layout_toLeftOf="@+id/button_share"
+        android:layout_weight="1"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
+
+    <Button
+        android:id="@+id/button_plot"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/button_share"
+        android:onClick="plotMenu"
+        android:text="@string/plot_data"
+        android:textSize="28sp" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/button_share"
+        android:onClick="saveMenu"
+        android:text="@string/save_data"
+        android:textSize="28sp" />
+    <!-- android:onClick="@menu/saving_menu" -->
+    <!-- </RelativeLayout> -->
+
+
+    <!-- aChartEngine -->
+
+    <RelativeLayout
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button_share"
+        android:layout_below="@+id/button_group"
+        android:orientation="vertical" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/button_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/button_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/button_collect"
+            android:onClick="openArchive"
+            android:text="@string/load_data"
+            android:textSize="28sp" />
+
+        <Button
+            android:id="@+id/button_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:onClick="sendCollectSignal"
+            android:text="@string/collect_data"
+            android:textSize="28sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_save"
+        android:layout_alignTop="@+id/chart"
+        android:text="@string/send" />
+
+    <EditText
+        android:id="@+id/edit_text_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_send"
+        android:layout_below="@+id/button_send"
+        android:layout_weight="1"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>
