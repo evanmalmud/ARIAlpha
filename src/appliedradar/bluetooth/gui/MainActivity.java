@@ -45,7 +45,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnMenuItemClickListener {
 	// Debugging
-    private static final String TAG = "BluetoothChat";
+    private static final String TAG = "MainActivity";
     private static final boolean D = true;
 
     // Message types sent from the BluetoothChatService Handler
@@ -72,6 +72,10 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     private String mConnectedDeviceName = null;
     // Array adapter for the conversation thread
     private ArrayAdapter<String> mConversationArrayAdapter;
+    //STRING ARRAY for Data
+    private ArrayAdapter<String> mStringData;
+    //DATA ARRAY of 2048 data points
+    double[] newDataArray = new double[2048];
     // String buffer for outgoing messages
     private StringBuffer mOutStringBuffer;
     // Local Bluetooth adapter
@@ -82,6 +86,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     
     
 	ShareActionProvider mShareActionProvider;
+	double[] dataArray;
 	private GraphicalView mChartView;
 	protected XYMultipleSeriesDataset mDataset;
 	protected XYMultipleSeriesRenderer mRenderer;
@@ -249,7 +254,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
         final ActionBar actionBar = getActionBar();
         actionBar.setSubtitle(subTitle);
     }
-
+    int n = 0;
     // The Handler that gets information back from the BluetoothChatService
     private final Handler mHandler = new Handler() {
         @Override
@@ -282,6 +287,16 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
                 // construct a string from the valid bytes in the buffer
                 String readMessage = new String(readBuf, 0, msg.arg1);
                 mConversationArrayAdapter.add(mConnectedDeviceName+":  " + readMessage);
+                mStringData.add(readMessage);
+                try {
+                	 if (n<2048){
+                	newDataArray[n] = Float.parseFloat(readMessage);
+                	if(D) Log.e(TAG, String.valueOf(n) + String.valueOf(newDataArray[n]));
+                	 }
+                	 n++;
+                	} catch (NumberFormatException e) {
+                	  // p did not contain a valid double
+                	}
                 break;
             case MESSAGE_DEVICE_NAME:
                 // save the connected device's name
@@ -346,54 +361,10 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		return true;
 	}
 
-	/*
-	 * public void doShare(Intent shareIntent) { List<Intent>
-	 * targetedShareIntents = new ArrayList<Intent>(); shareIntent = new
-	 * Intent(android.content.Intent.ACTION_SEND);
-	 * shareIntent.setType("text/plain"); List<ResolveInfo> resInfo =
-	 * getPackageManager().queryIntentActivities(shareIntent, 0); if
-	 * (!resInfo.isEmpty()) { for (ResolveInfo resolveInfo : resInfo) { String
-	 * packageName = resolveInfo.activityInfo.packageName; Intent
-	 * targetedShareIntent = new Intent(android.content.Intent.ACTION_SEND);
-	 * targetedShareIntent.setType("text/plain");
-	 * targetedShareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-	 * "subject to be shared"); // if (StringUtils.equals(packageName,
-	 * "com.facebook.katana")){ //
-	 * targetedShareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-	 * "http://link-to-be-shared.com"); // }else{ //
-	 * targetedShareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-	 * "text message to shared"); // }
-	 * 
-	 * targetedShareIntent.setPackage(packageName);
-	 * targetedShareIntents.add(targetedShareIntent); } Intent chooserIntent =
-	 * Intent.createChooser(targetedShareIntents.remove(0),
-	 * "Select app to share");
-	 * chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
-	 * targetedShareIntents.toArray(new Parcelable[]{}));
-	 * startActivity(chooserIntent); } }
-	 */
-
-	// Intent shareIntent = new Intent(Intent.ACTION_SEND);
-
-	/*
-	 * public void doShare(Intent shareIntent) { if (mShareActionProvider !=
-	 * null) { mShareActionProvider.setShareIntent(shareIntent); } // Intent
-	 * shareIntent = new Intent(); // shareIntent.setAction(Intent.ACTION_SEND);
-	 * // shareIntent.setType("image/*"); ////
-	 * shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage); //
-	 * startActivity(Intent.createChooser(shareIntent,
-	 * getResources().getText(R.string.send_to))); }
-	 */
-
-	/*
-	 * // Call to update the share intent private void setShareIntent(Intent
-	 * shareIntent) { if (mShareActionProvider != null) {
-	 * mShareActionProvider.setShareIntent(shareIntent); } }
-	 */
-
 	public void sendCollectSignal(View toast) {
 		Toast.makeText(this, "Selected Collect Data", Toast.LENGTH_SHORT)
 				.show();
+		
 	}
 
 	public void openArchive(View newActivity) {
@@ -405,7 +376,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 	public void plotFFT(View fftPlot) {
 	
 		Toast.makeText(this, "Selected Plot FFT", Toast.LENGTH_SHORT).show();
-		sendMessage("Hi Jill");
+		sendMessage("Hi Jill"); //SEND MESSAGE OFF PLOT FFT
 //		double[] print = getFftData();
 //		System.out.println("Clicking plotFFT button, print=" + print);
 	//	mChartView.repaint(dataSeries2.getMyData(print));
@@ -517,9 +488,6 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		}
 		return false;
 	}
-
-	
-	double[] dataArray;
 	
 	// gets Data from a file in External Storage --> SD Card (?)
 	// NEED TO UPDATE FOR UNIVERSAL DATA FILES 
@@ -572,7 +540,18 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		
 		return myData;
 	}
-
+	
+	public double[] getFftData() {
+		
+		double[] fftArray = new double[2048];
+		
+		calculateFft fftData = new calculateFft(2048);
+		fftArray = fftData.realArray(dataArray);
+		//System.out.println("returned data" + fftData);
+		
+		return fftArray;
+	}
+	
 	public XYMultipleSeriesRenderer getMyRenderer() {
 		XYSeriesRenderer r1 = new XYSeriesRenderer();
 		r1.setColor(Color.BLUE);
@@ -630,18 +609,6 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		myRenderer.setYLabels(9);
 		myRenderer.setShowGrid(true);
 		return myRenderer;
-	}
-	
-	
-	public double[] getFftData() {
-		
-		double[] fftArray = new double[2048];
-		
-		calculateFft fftData = new calculateFft(2048);
-		fftArray = fftData.realArray(dataArray);
-		//System.out.println("returned data" + fftData);
-		
-		return fftArray;
 	}
 	
 } //END OF MAINACTIVITY CODE!
