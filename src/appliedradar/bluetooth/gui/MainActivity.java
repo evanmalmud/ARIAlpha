@@ -355,6 +355,9 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 				.getActionProvider();
 
 		// Return true to display menu
+		//if(deflate3 == true){
+			//getMenuInflater().deflate(R.id.bt_settings, menuItem);
+		//}
 		return true;
 	}
 
@@ -405,9 +408,8 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
         	if (!mBluetoothAdapter.isEnabled()) {
 	            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 	            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-	            
-	            //DEFLATE BLUETOOTH CONNECTIONS TAB
-	            
+	          //DID NOT WORKKKKKKKKKKKKKKKKKKKKKKKKK
+	            getMenuInflater().inflate(R.id.bt_settings, null);
 	        // Otherwise, setup the chat session
 	        } else {
 	            if (mChatService == null) setupChat();
