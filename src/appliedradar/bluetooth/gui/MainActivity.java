@@ -101,8 +101,6 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
             Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_LONG).show();
-            finish();
-            return;
         }
 		if (mChartView == null) {
 			RelativeLayout layout = (RelativeLayout) findViewById(R.id.chart);
@@ -329,8 +327,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
             } else {
                 // User did not enable Bluetooth or an error occurred
                 Log.d(TAG, "BT not enabled");
-                Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(this, R.string.bt_not_enabled, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -404,6 +401,18 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		
 		Intent serverIntent = null;
         switch (item.getItemId()) {
+        case R.id.bt_settings:
+        	if (!mBluetoothAdapter.isEnabled()) {
+	            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+	            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+	            
+	            //DEFLATE BLUETOOTH CONNECTIONS TAB
+	            
+	        // Otherwise, setup the chat session
+	        } else {
+	            if (mChatService == null) setupChat();
+	        }
+        	return true;
         case R.id.connect_scan:
             // Launch the DeviceListActivity to see devices and do scan
             serverIntent = new Intent(this, DeviceListActivity.class);

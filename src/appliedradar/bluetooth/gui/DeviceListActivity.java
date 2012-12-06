@@ -43,14 +43,12 @@ public class DeviceListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Setup the window
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.device_list);
 
         // Set result CANCELED in case the user backs out
         setResult(Activity.RESULT_CANCELED);
-
         // Initialize the button to perform device discovery
         Button scanButton = (Button) findViewById(R.id.button_scan);
         scanButton.setOnClickListener(new OnClickListener() {

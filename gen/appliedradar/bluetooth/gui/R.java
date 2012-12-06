@@ -62,7 +62,7 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f040018;
         public static final int binary_file=0x7f040015;
-        public static final int bt_not_enabled_leaving=0x7f040002;
+        public static final int bt_not_enabled=0x7f040002;
         public static final int bt_settings=0x7f04001d;
         public static final int button_scan=0x7f04000c;
         public static final int collect_data=0x7f040021;
