@@ -64,9 +64,9 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     private static final int REQUEST_ENABLE_BT = 3;
 
     // Layout Views
-    private ListView mConversationView;
-    private EditText mOutEditText;
-    private Button mSendButton;
+    //private ListView mConversationView;
+    //private EditText mOutEditText;
+   // private Button mSendButton;
 
     // Name of the connected device
     private String mConnectedDeviceName = null;
@@ -99,6 +99,15 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
             finish();
             return;
         }
+		if (mChartView == null) {
+			RelativeLayout layout = (RelativeLayout) findViewById(R.id.chart);
+			mChartView = ChartFactory.getLineChartView(this, getMyData(),
+					getMyRenderer());
+			layout.addView(mChartView);
+		} else {
+			mChartView.repaint(); // use this whenever data has changed and you
+									// want to redraw
+		}
 	}
 	
 	 @Override
@@ -115,15 +124,6 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 	        } else {
 	            if (mChatService == null) setupChat();
 	        }
-	        if (mChartView == null) {
-				RelativeLayout layout = (RelativeLayout) findViewById(R.id.chart);
-				mChartView = ChartFactory.getLineChartView(this, getMyData(),
-						getMyRenderer());
-				layout.addView(mChartView);
-			} else {
-				mChartView.repaint(); // use this whenever data has changed and you
-										// want to redraw
-			}
 	    }
 	 
 	 
@@ -148,23 +148,23 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 
         // Initialize the array adapter for the conversation thread
         mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
-        mConversationView = (ListView) findViewById(R.id.in);
-        mConversationView.setAdapter(mConversationArrayAdapter);
+        //mConversationView = (ListView) findViewById(R.id.in);
+        //mConversationView.setAdapter(mConversationArrayAdapter);
 
         // Initialize the compose field with a listener for the return key
-        mOutEditText = (EditText) findViewById(R.id.edit_text_out);
-        mOutEditText.setOnEditorActionListener(mWriteListener);
+        //mOutEditText = (EditText) findViewById(R.id.edit_text_out);
+        //mOutEditText.setOnEditorActionListener(mWriteListener);
 
         // Initialize the send button with a listener that for click events
-        mSendButton = (Button) findViewById(R.id.button_send);
-        mSendButton.setOnClickListener(new OnClickListener() {
+        //mSendButton = (Button) findViewById(R.id.button_send);
+        /*mSendButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 // Send a message using content of the edit text widget
                 TextView view = (TextView) findViewById(R.id.edit_text_out);
                 String message = view.getText().toString();
                 sendMessage(message);
             }
-        });
+        });*/
 
         // Initialize the BluetoothChatService to perform bluetooth connections
         mChatService = new BluetoothChatService(this, mHandler);
@@ -222,11 +222,11 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 
             // Reset out string buffer to zero and clear the edit text field
             mOutStringBuffer.setLength(0);
-            mOutEditText.setText(mOutStringBuffer);
+            //mOutEditText.setText(mOutStringBuffer);
         }
     }
 
-    // The action listener for the EditText widget, to listen for the return key
+   /* // The action listener for the EditText widget, to listen for the return key
     private TextView.OnEditorActionListener mWriteListener =
         new TextView.OnEditorActionListener() {
         public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
@@ -238,7 +238,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
             if(D) Log.i(TAG, "END onEditorAction");
             return true;
         }
-    };
+    };*/
 
     private final void setStatus(int resId) {
         final ActionBar actionBar = getActionBar();
@@ -405,6 +405,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 	public void plotFFT(View fftPlot) {
 	
 		Toast.makeText(this, "Selected Plot FFT", Toast.LENGTH_SHORT).show();
+		sendMessage("Hi Jill");
 //		double[] print = getFftData();
 //		System.out.println("Clicking plotFFT button, print=" + print);
 	//	mChartView.repaint(dataSeries2.getMyData(print));
